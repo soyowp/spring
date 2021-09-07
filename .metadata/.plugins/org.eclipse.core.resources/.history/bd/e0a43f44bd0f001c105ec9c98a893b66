@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		
+		
+		
+<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 외부 패키지에 속한 파일을 사용하려면 자바 코드에서는 import구문을 이용했습니다.
+	그러나 스프링 빈 컨테이너 내부에서는 컴포넌트 스캔이라는것을 이요하거나, bean태그를 이용합니다.-->		
+	<bean id="Singer" class="org.ict.controller.di.classfile.Singer"></bean>
+	<bean id="Stage" class="org.ict.controller.di.classfile.Stage"></bean>
+	
+	<!--stage는 생성자에서 singer를 요청하기 떄문에 bean태그 사이에singer를 넣을 수 있도록 constructor-arg를 추가합니다.-->
+
+	<!--broadcast도 공장에 주문하기-->
+	<bean id="broadcast" class="org.ict.controller.di.classfile.Broadcast">
+	<constructor-arg ref="stage"/>
+	</bean>
+	</beans>

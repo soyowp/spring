@@ -1,0 +1,16 @@
+package org.ict.controller.di.classfile;
+
+public class Broadcast {
+
+	private Stage stage;
+	
+	public Broadcast(Stage stage) {
+		this.stage = stage;
+	}
+	
+	public void onair() {
+		System.out.println("¹æ¼Û¿ë ");
+		stage.perform();
+		
+	}
+}
