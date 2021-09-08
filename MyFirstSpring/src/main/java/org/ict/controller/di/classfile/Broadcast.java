@@ -14,7 +14,7 @@ public class Broadcast {
 	}
 	
 	public void onair() {
-		System.out.println("¹æ¼Û¿ë ");
+		System.out.print("ë°©ì†¡ìš© ");
 		stage.perform();
 		
 	}

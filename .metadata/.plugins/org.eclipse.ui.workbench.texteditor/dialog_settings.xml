@@ -6,7 +6,15 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
+		<item key="selection" value="url"/>
 		<list key="findhistory">
+			<item value="url"/>
+			<item value="rul"/>
+			<item value="&lt;filter&gt;"/>
+			<item value="filter"/>
+			<item value="controller"/>
+			<item value="logger"/>
+			<item value="1.6"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -14,7 +14,7 @@ public class Stage {
 	}
 
 	public void perform() {
-		System.out.println("¹«´ë¿¡¼­ ");
+		System.out.print("ë¬´ëŒ€ì—ì„œ ");
 		singer.sing();
 	}
 }

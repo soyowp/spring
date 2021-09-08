@@ -1,32 +1,25 @@
 package org.ict.controller.di;
 
-import org.ict.controller.di.classfile.Broadcast;
-import org.ict.controller.di.classfile.Singer;
-import org.ict.controller.di.classfile.Stage;
+
+import org.ict.controller.di.classfile.Satellite;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class DiMainSpringVer {
     public static void main(String[] args) {
-        // ºó ÄÁÅ×ÀÌ³Ê¿¡ È£ÃâÇØ ¿Ï¼ºÇ° °´Ã¼¸¦ ¹Ş¾Æ¿Í ½ÇÇàÇÏ´Â ÄÚµå¸¦ ÀÛ¼ºÇØº¾´Ï´Ù.
-        // È£Ãâ½Ã »ç¿ëÇÏ´Â ¿¬¶ô¿ë °´Ã¼´Â GenericXmlApplicationContextÀÔ´Ï´Ù.
+        
+        //ì»´í¬ë„ŒíŠ¸ ìŠ¤ìº” í˜¸ì¶œìš© ê°ì²´ GenericXmlApplicationContext
 
         GenericXmlApplicationContext context = new GenericXmlApplicationContext(
                 "file:src/main/webapp/WEB-INF/spring/root-context.xml");
 
-        // À§¿¡ root-context.xmlÀÌ¶ó´Â bean-container¿Í ¿¬¶ôÀ» ÇÏÙ´Ù°í ÁöÁ¤ÇßÀ¸´Ï
-        // ÀÌÁ¦ ±× °øÀå °´Ã¼¸¦ ¸¶À½²¯ ²¨³»¾µ¼ö ÀÖ½À´Ï´Ù.
-        // ¾ò¾î³ë´Â ¹æ¹ıÀº À§¿¡ »ı¼ºÇÑ context°´Ã¼¸¦ ÀÌ¿ëÇØ
-        // context.getBean("beanÀÌ¸§", ÀÚ·áÇü.class); ÀÔ´Ï´Ù
-        Singer singer = context.getBean("Singer", Singer.class);
-        singer.sing();
-        
-        Stage stage = context.getBean("Stage", Stage.class);
-        stage.perform();
-        
-        Broadcast broad = context.getBean("Broadcast",Broadcast.class);
-        broad.onair();
+        // ìœ„ì— root-context.xmlì´ë¼ëŠ” bean-containerì™€ ì—°ë½ì„ í•˜ê² ë‹¤ê³  ì§€ì •í–ˆìœ¼ë‹ˆ
+        // context.getBean("beanì´ë¦„", ìë£Œí˜•.class);
 
-        // È£Ãâ ÈÄ context¸¦ ´İ¾Æ¾ßÇÑ´Ù
+        Satellite satellite = context.getBean("satellite", Satellite.class);
+        satellite.international();
+
+        //context.close(); í•´ì£¼ê¸°
+        
         
         context.close();
     }

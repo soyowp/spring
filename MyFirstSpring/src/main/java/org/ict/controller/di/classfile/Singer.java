@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public class Singer {
 
 	public void sing() {
-		System.out.println("°¡¼ö°¡ ³ë·¡¸¦ ÇÕ´Ï´Ù.");
+		System.out.print("ê°€ìˆ˜ê°€ ë…¸ëž˜ë¥¼ í•©ë‹ˆë‹¤");
 	}
 }
