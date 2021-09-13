@@ -2,10 +2,12 @@ package org.ict.controller;
 
 import java.util.Scanner;
 
+import org.ict.domain.TestVO;
 import org.springframework.http.client.InterceptingClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -132,5 +134,21 @@ public class MvcController {
 		//1에서 얻어온 파라미터를 2에서 출력
 	}
 	
+	
+	//원래 파라미터의 자료형이 int, String등 이었던 경우는
+	//단일 자로형이었기 때문에 get, post방식으로 전달되는 데이터를 자동을
+	//받아서 처리할 수 있었습니다.
+	//현재 Testvo내부에는 int age, String name이 들어있고
+	//TestVO를 아래와 같이 선언하는 것만으로도, int age, String name을 선언하는것과
+	//같은 효과를 볼 수 있습니다. (testVO내부에 선언했기때문에)
+	// 즉 ?age=...&name=... 이라고 적는 데이터를 받는것이 가능하다.
+	@RequestMapping(value = "/getVO")
+	public String getVO(TestVO vo, Model model) {
+		System.out.println("받아온 객체 : " + vo);
+		//1 testvo 내부에 멤버변수 하나 더 추가해 3개 처리
+		//2 voview.jsp를 생성하고 거기에 vo내부 멤버변수값을 각각 따로 화면에 표시하기
+		model.addAttribute("vo", vo);
+		return "testvo/voview";
+	}
 	
 }

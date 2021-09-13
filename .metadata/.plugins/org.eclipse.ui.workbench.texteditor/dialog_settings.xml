@@ -6,8 +6,16 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="url"/>
+		<item key="selection" value="Data"/>
 		<list key="findhistory">
+			<item value="data"/>
+			<item value="ser"/>
+			<item value="test"/>
+			<item value="junit"/>
+			<item value="spring-test"/>
+			<item value="spring"/>
+			<item value="lom"/>
+			<item value="de"/>
 			<item value="url"/>
 			<item value="rul"/>
 			<item value="&lt;filter&gt;"/>
