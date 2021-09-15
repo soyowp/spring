@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ict.mapper.BoardMapper">
+
+	<!-- 위의 BoardMapper인터페이스의 getList메서드를 호출시 실제로 실행할 쿼리문을 아래와 같이 연결해줍니다. -->
+	<!-- mybatis는 단일자료와 리스트자료를 구문하지 않기 때문에 resultType에는 LIST<>자료형도 아래와 같이 단일 
+		vo만 적어주면됩니다. -->
+
+	<select id="getList" resultType="org.ict.domain.BoardVO">
+		<![CDATA[
+		SELECT * FROM board_tbl ORDER BY bno ASC
+		]]>
+	</select>
+
+
+	<!-- insert 메서드 연결하고 쿼리문만 작성 -->
+	<!-- 현재 insert는 BoardVO를 파라미터로 받고있습니다. -->
+	<!-- 이 경우 #{변수명}을 쿼리문으로 전달이 가능합니다. -->
+	<insert id="insert">
+		<![CDATA[
+	INSERT INTO board_tbl(bno, title, content, writer)VALUES(board_num.NEXTVAL, #{title}, #{content}, #{writer})
+	]]>
+	</insert>
+
+
+
+	<select id="select" resultType="org.ict.domain.BoardVO">
+		<![CDATA[ 
+		SELECT * FROM board_tbl WHERE bno = #{bno}
+		]]>
+	</select>
+
+
+	<delete id="delete">
+	<![CDATA[
+	DELETE FROM board_tbl WHERE bno = #{bno}
+	]]>
+	</delete>
+
+	<update id="update">
+	<![CDATA[
+	UPDATE board_tbl SET title= #{title}, content= #{content}, writer= #{writer}, updatedate=sysdate WHERE bno = #{bno}
+	]]>
+	</update>
+
+</mapper>

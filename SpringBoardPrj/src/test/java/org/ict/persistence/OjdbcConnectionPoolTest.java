@@ -1,4 +1,4 @@
-package org.ict.dao;
+package org.ict.persistence;
 
 import static org.junit.Assert.fail;
 
@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class MySQLConnectionPoolTest {
+public class OjdbcConnectionPoolTest {
 	
 	@Autowired
 	private DataSource dataSource;
