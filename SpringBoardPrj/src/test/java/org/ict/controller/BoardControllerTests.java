@@ -17,7 +17,7 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
-//controller를 호출해서 둘 다 포함시켜야함
+// controller를 호출해서 둘 다 포함시켜야함
 @Log4j
 @WebAppConfiguration // 웹사이트 모의접속용 어노테이션
 public class BoardControllerTests {
@@ -36,7 +36,7 @@ public class BoardControllerTests {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
 	}
 
-	@Test
+	// @Test
 	public void testList() throws Exception {
 		log.info(
 				// .get접속주소/.post접속주소 를 제외한 나머지는
@@ -46,5 +46,47 @@ public class BoardControllerTests {
 				// /board/list에 접속하면 글 목록을 가져오는 페이지이기때문에
 				// 글 전체 목록을 가져오는지 여부를 테스트합니다.
 				mockMvc.perform(MockMvcRequestBuilders.get("/board/list")).andReturn().getModelAndView().getModelMap());
+	}
+
+	// /board/register 주소로 파라미터 값을 post방식으로 넘겼을때 글이 써지는지 테스트
+	// @Test
+	public void testRegister() throws Exception {
+
+		String resultPage = mockMvc
+				.perform(MockMvcRequestBuilders.post("/board/register").param("title", "테스트코드 제목")
+						.param("content", "테스트코드 본문").param("writer", "테스트코드 글쓴이"))
+				.andReturn().getModelAndView().getViewName();
+		log.info(resultPage);
+	}
+
+	// .param("bno", "글번호")로 파라미터를 줬을때 해당 글이 잘 얻어와지는지 체크해주세요
+	// 참고로 .param()으로 전달하는 자료는 자료형을 막론하고 ""로 감싸서 문자화시키는데
+	// url에는 자료형이 없고 String뿐이기 때문입니다.
+
+	// @Test
+	public void testGet() throws Exception {
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.get("/board/get").param("bno", "1")).andReturn()
+				.getModelAndView().getViewName();
+		log.info(resultPage);
+	}
+
+	// @Test
+	public void testRemove() throws Exception {
+		String resultpage = mockMvc.perform(MockMvcRequestBuilders.post("/board/remove").param("bno", "4")).andReturn()
+				.getModelAndView().getViewName();
+		log.info(resultpage);
+	}
+
+	@Test
+	public void testModify() throws Exception{
+		String resultpage = mockMvc.perform(
+				MockMvcRequestBuilders.post("/board/modify")
+				.param("bno", "1")
+				.param("title", "컨트롤러수정제목")
+				.param("content", "컨트롤러수정내용")
+				.param("writer", "컨트롤러수정글쓴이"))
+				.andReturn().getModelAndView().getViewName();
+		log.info(resultpage);
+						
 	}
 }

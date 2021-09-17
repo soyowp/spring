@@ -3,8 +3,6 @@ package org.ict.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.logging.Log;
 import org.ict.domain.BoardVO;
 
 @Mapper
@@ -14,12 +12,17 @@ public interface BoardMapper {
 	// 어노테이션을 이요해 작성해주세요
 
 	// @Select("SELECT * FROM board_tbl where bno<=3")
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(String keyword);
 
 	// insert구문 실행용으로 메서드를 선언합니다.
 	// VO내부에 적혀있는 정보를 이용해 insert합니다.
 	public void insert(BoardVO vo);
-
+	
+	// insert대신 insertSelectKey 를 적용해주기
+	public void insertSelectKey(BoardVO vo);
+	
+	
+	
 	// 글번호(Long bno)를 파라미터로 받아
 	// 해당 글 번호에 해당하는 글을 리턴해 보여주는 메서드를 작성
 	// 메서드 이름은 select로, xml도 작성하기
@@ -36,4 +39,5 @@ public interface BoardMapper {
 	//where구문은 bno로 구분해서 처리
 	
 	public void update(BoardVO vo); 
+	
 }

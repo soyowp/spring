@@ -8,6 +8,8 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="insert"/>
+			<item value="get"/>
 			<item value="board"/>
 			<item value="zoo"/>
 			<item value="jstl"/>
@@ -21,8 +23,6 @@
 			<item value="de"/>
 			<item value="url"/>
 			<item value="rul"/>
-			<item value="&lt;filter&gt;"/>
-			<item value="filter"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -33,7 +33,7 @@ public class BoardMapperTests {
 
 	@Test
 	public void testGetList() {
-		log.info(boardMapper.getList());
+		log.info(boardMapper.getList(null));
 	}
 
 	// insert코드를 작성합니다.

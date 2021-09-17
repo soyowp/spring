@@ -43,7 +43,7 @@ public class BoardServiceTest {
 	
 	//@Test
 	public void TestGetList() {
-		log.info(service.getList());
+		log.info(service.getList(null));
 	}
 	
 	//@Test
