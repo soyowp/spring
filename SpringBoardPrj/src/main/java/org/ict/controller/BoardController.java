@@ -61,7 +61,8 @@ public class BoardController {
 		// mode.addAttribut()를 쓴다면
 		// 일반 이동이 아닌 redirect 이동시는 데이터가 소실됩니다.
 		// 이를 막기 위해 rttr.addFlashAttribute로 대체합니다.
-		rttr.addFlashAttribute("result", vo.getBno());
+		rttr.addFlashAttribute("success", "register");
+		rttr.addFlashAttribute("bno", vo.getBno());
 
 		// views폴더 하위 board폴더의 list.jsp출력
 		// redirect로 이동시킬때는 "redirect: 파일명"
