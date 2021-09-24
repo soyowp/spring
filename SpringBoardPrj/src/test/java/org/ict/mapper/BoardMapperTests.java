@@ -5,6 +5,7 @@ import java.rmi.StubNotFoundException;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.ict.domain.BoardVO;
+import org.ict.domain.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,16 @@ public class BoardMapperTests {
 	// 선언하고 자동주입으로넣어주세요
 
 	@Autowired
-	private BoardMapper boardMapper;
+	private BoardMapper mapper;
 
 	// 테스트용 메서드의 이름은 testGetList입니다.
 	// 테스트코드가 실행될 수 있도록 만들어주세요.
 
-	@Test
+	//@Test
 	public void testGetList() {
-		log.info(boardMapper.getList(null));
+		// 키워드(문자열)를 넣도록 getList를 바꿔놔서 아래와같이 "" 를 넣어줘야 합니다.
+		// 방금처럼 null이 들어가있으면 문자열이 아니라 에러를 유발할 수 있습니다.
+		log.info(mapper.getList(""));
 	}
 
 	// insert코드를 작성합니다.
@@ -47,26 +50,35 @@ public class BoardMapperTests {
 		vo.setTitle("테스트용 제목");
 		vo.setContent("테스트용 내용");
 		vo.setWriter("관리자");
-		boardMapper.insert(vo);
+		mapper.insert(vo);
 	}
 
 	// @Test
 	public void testSelect() {
-		boardMapper.select(3L);
+		mapper.select(3L);
 	}
 
 	// @Test
 	public void testDelete() {
-		boardMapper.delete(2L);
+		mapper.delete(2L);
 	}
 	
-	@Test
+	// @Test
 	public void testUpdate() {
 		BoardVO vo = new BoardVO();
 		vo.setTitle("수정된 내용");
 		vo.setContent("수정된 내용");
 		vo.setWriter("수정된 작성자");
 		vo.setBno(3L);
-		boardMapper.update(vo);
+		mapper.update(vo);
+	}
+	
+	@Test
+	public void testgetPaging() {
+		//페이징코드를 이용해 원하는 번호의 페이지가 출력되는지 확인하기
+		Criteria cri = new Criteria(3, 10);
+		mapper.getListPaging(cri);
+		
+		
 	}
 }

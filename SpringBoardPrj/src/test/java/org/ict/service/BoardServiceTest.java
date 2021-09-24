@@ -3,6 +3,7 @@ package org.ict.service;
 import static org.junit.Assert.assertNotNull;
 
 import org.ict.domain.BoardVO;
+import org.ict.domain.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +62,14 @@ public class BoardServiceTest {
 		service.modify(vo);		
 	}
 	
-	@Test
+	//@Test
 	public void TestRemove() {
 		service.remove(10L);
-		
-		
+	}
+	
+	@Test
+	public void testGetListPaging() {
+		Criteria cri = new Criteria(200, 10);
+		service.getListPaging(cri);
 	}
 }
