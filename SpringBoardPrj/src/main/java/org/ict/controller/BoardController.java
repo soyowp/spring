@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ict.domain.BoardVO;
 import org.ict.domain.Criteria;
+import org.ict.domain.PageDTO;
 import org.ict.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,17 @@ public class BoardController {
 	@GetMapping("/list")
 	public void list(Model model, Criteria cri) {
 		List<BoardVO> vo = service.getListPaging(cri);
-		log.info(vo);
+		int totalpage = service.totalPage();
+		
+		
+		// 페이지 밑에 깔아줄 페이징 정보 관련
+		// 임의로 갯수 입력
+		// DB에서 전체 글 갯수를 조회해서 넣도록 코드를 작성.
+		PageDTO btnMaker = new PageDTO(cri, totalpage, 10);
+		
+		model.addAttribute("btnMaker", btnMaker);
 		model.addAttribute("list", vo);
+		
 	}
 
 	// 아래 주소로 데이터를 보내줄수 있는 form을 작성

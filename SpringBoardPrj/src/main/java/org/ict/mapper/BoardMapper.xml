@@ -80,4 +80,9 @@
 	]]>
 	</select>
 
+	<select id="totalPage" resultType="int">
+	<![CDATA[
+	SELECT COUNT(bno) cnt FROM board_tbl
+	]]>
+	</select>
 </mapper>

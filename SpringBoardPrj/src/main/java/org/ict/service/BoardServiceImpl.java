@@ -74,4 +74,11 @@ public class BoardServiceImpl implements BoardService {
 		List<BoardVO> listPaging = mapper.getListPaging(cri);
 		return listPaging;
 	}
+	
+	@Override
+	public int totalPage() {
+		log.info("현재 글 갯수");
+		int totalPage = mapper.totalPage();
+		return totalPage;
+	}
 }

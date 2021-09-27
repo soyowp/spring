@@ -73,12 +73,16 @@ public class BoardMapperTests {
 		mapper.update(vo);
 	}
 	
-	@Test
+	// @Test
 	public void testgetPaging() {
 		//페이징코드를 이용해 원하는 번호의 페이지가 출력되는지 확인하기
 		Criteria cri = new Criteria(3, 10);
 		mapper.getListPaging(cri);
 		
-		
+	}
+	
+	@Test
+	public void testTotlapage() {
+		mapper.totalPage();
 	}
 }
