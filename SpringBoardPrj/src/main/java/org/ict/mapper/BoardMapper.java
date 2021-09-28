@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.ict.domain.BoardVO;
 import org.ict.domain.Criteria;
+import org.ict.domain.SearchCriteria;
 
 @Mapper
 public interface BoardMapper {
@@ -41,8 +42,8 @@ public interface BoardMapper {
 	// 페이징 처리를 하면서 조회하기 위해
 	// Criteria정보를 파라미터로 제공해야
 	// 몇 페이지의 글을 조회할지 정보를 같이 쿼리문에 전송이 가능
-	public List<BoardVO> getListPaging(Criteria criteria);
+	public List<BoardVO> getListPaging(SearchCriteria criteria);
 	
-	public int totalPage();
+	public int totalPage(SearchCriteria cri);
 	
 }

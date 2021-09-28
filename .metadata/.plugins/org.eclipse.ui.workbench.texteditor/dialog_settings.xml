@@ -6,8 +6,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="search"/>
 		<list key="findhistory">
+			<item value="search"/>
+			<item value="null"/>
+			<item value="Crite"/>
+			<item value="crite"/>
+			<item value="btn"/>
+			<item value="page"/>
 			<item value="insert"/>
 			<item value="get"/>
 			<item value="board"/>
@@ -17,12 +23,6 @@
 			<item value="ser"/>
 			<item value="test"/>
 			<item value="junit"/>
-			<item value="spring-test"/>
-			<item value="spring"/>
-			<item value="lom"/>
-			<item value="de"/>
-			<item value="url"/>
-			<item value="rul"/>
 		</list>
 		<list key="replacehistory">
 		</list>

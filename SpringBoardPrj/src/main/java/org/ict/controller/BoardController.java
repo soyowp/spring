@@ -5,6 +5,7 @@ import java.util.List;
 import org.ict.domain.BoardVO;
 import org.ict.domain.Criteria;
 import org.ict.domain.PageDTO;
+import org.ict.domain.SearchCriteria;
 import org.ict.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,9 +44,9 @@ public class BoardController {
 	// 페이징 처리용 메서드는 접속주소는 같으나
 	// 기존에 받던 자료에 더해서 Criteria를 추가로 입력받는다.
 	@GetMapping("/list")
-	public void list(Model model, Criteria cri) {
+	public void list(Model model, SearchCriteria cri) {
 		List<BoardVO> vo = service.getListPaging(cri);
-		int totalpage = service.totalPage();
+		int totalpage = service.totalPage(cri);
 		
 		
 		// 페이지 밑에 깔아줄 페이징 정보 관련

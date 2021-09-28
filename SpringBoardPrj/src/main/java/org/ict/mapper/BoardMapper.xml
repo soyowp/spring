@@ -75,14 +75,62 @@
 	(SELECT
 	/*+INDEX_DESC(board_tbl pk_board)*/
 	rownum rn, board_tbl.* FROM board_tbl
-	WHERE rownum <= #{pageNum}*#{amount}) tbl
+	WHERE  
+	]]>
+	<include refid="search"></include>
+	
+	<!-- MYSQL의 Limit와 같은 역할을 하는 부분 -->
+	<![CDATA[	
+	rownum <= #{pageNum}*#{amount}) tbl
 	WHERE rn > (#{pageNum}-1)*#{amount}
 	]]>
 	</select>
 
-	<select id="totalPage" resultType="int">
-	<![CDATA[
-	SELECT COUNT(bno) cnt FROM board_tbl
-	]]>
+
+	<select id="totalPage" resultType="int">	
+	SELECT COUNT(*) FROM board_tbl WHERE
+	<!-- 이부분이 sql태그에 저장된 조건절을 넣어주는 위치
+	searchType변수를 전달받기 위해 기존 totalBoard 호출 관련 메서드에
+	searchCriteria를 추가 -->	
+		<include refid="search"></include>	
+	bno>0
 	</select>
+	
+		<!-- 조건쿼리
+	먼저 searchType이 null인지 아닌지 여부를 확인 후
+	searchType이 null이 아닌 경우만 다시 어떤 키워드가 들어오는지
+	확인해서 맞는 조건문을 공통쿼리와 limit부분 사이에 붙여줍니다.-->
+	
+	<sql id="search">
+	<if test="searchType != null">
+		<if test="searchType == 't'.toString()">
+			(TITLE like '%'||#{keyword}||'%')AND
+		</if>
+		<if test="searchType == 'c'.toString()">
+			(CONTENT like '%'||#{keyword}||'%')AND
+		</if>
+		<if test="searchType == 'w'.toString()">
+			(WRITER like '%'||#{keyword}||'%')AND
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			(TITLE like '%'||#{keyword}||'%')
+				OR
+			(CONTENT like '%'||#{keyword}||'%')
+				AND
+		</if>
+		<if test="searchType == 'tw'.toString()">
+			(TITLE like '%'||#{keyword}||'%')
+				OR
+			(WRITER like '%'||#{keyword}||'%')
+				AND
+		</if>
+		<if test="searchType == 'wc'.toString()">
+			(WRITER like '%'||#{keyword}||'%')
+				OR
+			(CONTENT like '%'||#{keyword}||'%')
+				AND
+		</if>
+	</if>
+	</sql>
+	
 </mapper>

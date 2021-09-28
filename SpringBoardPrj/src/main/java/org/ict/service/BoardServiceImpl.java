@@ -5,6 +5,7 @@ import java.util.List;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.ict.domain.BoardVO;
 import org.ict.domain.Criteria;
+import org.ict.domain.SearchCriteria;
 import org.ict.mapper.BoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,16 +70,16 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getListPaging(Criteria cri) {
+	public List<BoardVO> getListPaging(SearchCriteria cri) {
 		log.info("게시물 목록 페이징");
 		List<BoardVO> listPaging = mapper.getListPaging(cri);
 		return listPaging;
 	}
 	
 	@Override
-	public int totalPage() {
+	public int totalPage(SearchCriteria cri) {
 		log.info("현재 글 갯수");
-		int totalPage = mapper.totalPage();
+		int totalPage = mapper.totalPage(cri);
 		return totalPage;
 	}
 }

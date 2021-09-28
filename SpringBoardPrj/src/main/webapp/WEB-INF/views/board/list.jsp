@@ -69,6 +69,7 @@ a {
 
 			<div class="row">
 				<div class="col-sm-12">
+			
 					<table class="table table-light table-hover">
 						<tr>
 							<td>글 번호</td>
@@ -98,7 +99,7 @@ a {
 								end="${btnMaker.endPage}" var="pageNum">
 								<li
 									class="page-item ${btnMaker.cri.pageNum == pageNum ? 'active' : '' }">
-									<a class="page-link" href="/board/list?pageNum=${pageNum }">
+									<a class="page-link" href="/board/list?pageNum=${pageNum }&searchType=${btnMaker.cri.searchType}&keyword=${btnMaker.cri.keyword}">
 										${pageNum} </a>
 								</li>
 							</c:forEach>
@@ -113,9 +114,35 @@ a {
 
 				<a href="/board/register"><button>글쓰기</button></a>
 
+				
 				<form action="/board/list" method="get">
+				
+				<select name ="searchType">
+				
+				<option value="n"
+				<c:out value="${cri.searchType == null ? 'selected' : '' }"/>>
+				-
+				</option>
+				<option value="t"
+				<c:out value="${cri.searchType eq 't' ? 'selected' : '' }"/>>
+				제목
+				</option>
+				<option value="c"
+				<c:out value="${cri.searchType eq 'c' ? 'selected' : '' }"/>>
+				본문
+				</option>
+				<option value="w"
+				<c:out value="${cri.searchType eq 'w' ? 'selected' : '' }"/>>
+				글쓴이
+				</option>
+				<option value="tc"
+				<c:out value="${cri.searchType eq 'tc' ? 'selected' : '' }"/>selected>
+				제목+본문
+				</option>
+				
+				</select>
 					<input type="text" name="keyword" placeholder="검색어입력"
-						value="${keyword }"> <input type="submit" value="검색">
+						value="${btnMaker.cri.keyword }"> <button id ="searchBtn">Search</button>
 				</form>
 
 				<!-- 모달 코드는 작성이 안 되어있는게 아니고 작성했지만 css의 display를 none으로 평상시에 두고 특정 조건을 만족했을때 display되게 설계됨 -->
