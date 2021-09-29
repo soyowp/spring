@@ -2,6 +2,9 @@ package org.ict.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.ict.domain.BoardVO;
 import org.ict.domain.Criteria;
 import org.ict.domain.PageDTO;
@@ -21,7 +24,7 @@ import lombok.extern.log4j.Log4j;
 @Controller // 컴포넌트스캔 컨트롤러
 @Log4j
 @RequestMapping("/board/*") // 클래스 위에 작성시
-//이 크래스를 사용하는 모든 메서드의 연결주소 앞에 /board/추가
+// 이 크래스를 사용하는 모든 메서드의 연결주소 앞에 /board/추가
 @AllArgsConstructor // 의존성 주입을 위해 생성자만 생성
 public class BoardController {
 	@Autowired
@@ -47,16 +50,15 @@ public class BoardController {
 	public void list(Model model, SearchCriteria cri) {
 		List<BoardVO> vo = service.getListPaging(cri);
 		int totalpage = service.totalPage(cri);
-		
-		
+
 		// 페이지 밑에 깔아줄 페이징 정보 관련
 		// 임의로 갯수 입력
 		// DB에서 전체 글 갯수를 조회해서 넣도록 코드를 작성.
 		PageDTO btnMaker = new PageDTO(cri, totalpage, 10);
-		
+
 		model.addAttribute("btnMaker", btnMaker);
 		model.addAttribute("list", vo);
-		
+
 	}
 
 	// 아래 주소로 데이터를 보내줄수 있는 form을 작성
@@ -128,10 +130,14 @@ public class BoardController {
 	// BoardVO로 받아서 수정한 다음 수정한 글의 디테일페이지로 넘어갑니다.
 
 	@PostMapping("/modify")
-	public String modify(BoardVO vo, RedirectAttributes rttr) {
+	public String modify(BoardVO vo, SearchCriteria cri, RedirectAttributes rttr, HttpServletRequest request) {
 		log.info("수정할 글 번호 : " + vo.getBno());
 		service.modify(vo);
-		return "redirect:/board/get?bno=" + vo.getBno();
+		log.info(cri);
+		rttr.addAttribute("bno", vo.getBno());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute("page", cri.getPageNum());
+		return "redirect:/board/get";
 	}
 	// 글 수정시에는 modify.jsp를 이용해 수정합니다.
 	// post방식이며 /boardmodify로 접속시 수정폼으로 접근시켜주세요
@@ -148,5 +154,19 @@ public class BoardController {
 		log.info(vo);
 		model.addAttribute("vo", vo);
 		return "board/boardmodify";
+	}
+
+	@GetMapping("/session1")
+	public String se1(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("sTest", "세션1테스트");
+		return "session1";
+	}
+
+	@GetMapping("/session2")
+	public String se2(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		log.info("세션 작동 확인 : " + session.getAttribute("sTest"));
+		return "session2";
 	}
 }

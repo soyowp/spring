@@ -15,13 +15,25 @@
 	<br /> 글쓴이 : ${detail.writer }
 	<br /> 쓴날짜 : ${detail.regdate } / 최종수정일 : ${detail.updatedate }
 	<br />
-	<a href="/board/list"><button>목록으로 돌아가기</button></a>
+	<!-- list에서 넘어오는 파라미터 확인 디버깅
+	get.jsp에서 바로 받아오도록 만들어주기 -->
+	<br/>
+	글번호 : ${param.bno }<br>
+	페이지 : ${param.page }<br>
+	검색어 : ${param.keyword }<br>
+	<a href="/board/list?bno=${param.bno}&page=${param.page}&keyword=${param.keyword}"><button>목록으로 돌아가기</button></a>
 	<form action="/board/remove" method="post">
-		<input type="hidden" name="bno" value=${detail.bno }> <input
-			type="submit" value="글 삭제">
+		<input type="hidden" name="bno" value=${detail.bno }>
+		<input type="hidden" name="bno" value="${detail.bno }">
+		<input type="hidden" name="page" value="${param.page }">
+		<input type="hidden" name="keyword" value="${param.keyword }">
+		<input type="submit" value="글 삭제">
 	</form>
 	<form action="/board/boardmodify" method="post">
 		<input type="hidden" name="bno" value=${detail.bno }>
+		<input type="hidden" name="bno" value="${detail.bno }">
+		<input type="hidden" name="page" value="${param.page }">
+		<input type="hidden" name="keyword" value="${param.keyword }">
 		<input type="submit" value="글 수정">
 	</form>
 </body>
