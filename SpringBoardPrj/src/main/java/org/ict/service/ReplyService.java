@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.ict.domain.ReplyVO;
 
-public interface replyService {
+public interface ReplyService {
 
 	public void addReply(ReplyVO vo);
 	public List<ReplyVO> replyList(Long bno);

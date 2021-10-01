@@ -6,8 +6,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="search"/>
+		<item key="selection" value="Re"/>
 		<list key="findhistory">
+			<item value="rep"/>
+			<item value="re"/>
+			<item value="bind"/>
 			<item value="search"/>
 			<item value="null"/>
 			<item value="Crite"/>
@@ -20,9 +23,6 @@
 			<item value="zoo"/>
 			<item value="jstl"/>
 			<item value="data"/>
-			<item value="ser"/>
-			<item value="test"/>
-			<item value="junit"/>
 		</list>
 		<list key="replacehistory">
 		</list>

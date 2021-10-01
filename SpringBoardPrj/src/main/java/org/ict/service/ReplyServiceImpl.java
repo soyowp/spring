@@ -3,7 +3,7 @@ package org.ict.service;
 import java.util.List;
 
 import org.ict.domain.ReplyVO;
-import org.ict.mapper.replyMapper;
+import org.ict.mapper.ReplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 @Log4j
-public class replyServiceImpl implements replyService {
+public class ReplyServiceImpl implements ReplyService {
 
 	@Autowired
-	private replyMapper mapper;
+	private ReplyMapper mapper;
 
 	@Override
 	public void addReply(ReplyVO vo) {

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.ict.domain.ReplyVO;
 
 @Mapper
-public interface replyMapper {
+public interface ReplyMapper {
 
 	public List<ReplyVO> getList(Long bno);
 
