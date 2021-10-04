@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;// 방금 java.awt의 mediaType을 가져와서 그렇습니다. 넵감사합니다
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +39,8 @@ public class ReplyController {
 		return entity;
 	}
 
-	@PostMapping(value = "/all/{bno}", produces = { MediaType.APPLICATION_XML_VALUE,
+	// 댓글 가져오는건 get방식으로 합니다. 넵29652번 글이 있나요? 감사합니다
+	@GetMapping(value = "/all/{bno}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<List<ReplyVO>> list(@PathVariable("bno") Long bno) {
 		ResponseEntity<List<ReplyVO>> entity = null;
