@@ -1,4 +1,5 @@
 #Tomcat publish data
-#Mon Oct 04 14:33:39 KST 2021
-org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\ict03-24\\.m2\\repository\\org\\springframework\\spring-web\\5.0.7.RELEASE\\spring-web-5.0.7.RELEASE.jar=C\:\\apache-tomcat-9.0.50\\wtpwebapps\\SpringBoardPrj\\WEB-INF\\lib\\spring-web-5.0.7.RELEASE.jar
+#Wed Oct 06 11:20:19 KST 2021
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\ict03-24\\.m2\\repository\\org\\springframework\\spring-web\\5.0.7.RELEASE\\spring-web-5.0.7.RELEASE.jar=C\:\\apache-tomcat-9.0.50\\wtpwebapps\\aop_prj\\WEB-INF\\lib\\spring-web-5.0.7.RELEASE.jar
 org.eclipse.jst.jee.server\:SpringBoardPrj=C\:\\apache-tomcat-9.0.50\\wtpwebapps\\SpringBoardPrj
+org.eclipse.jst.jee.server\:aop_prj=C\:\\apache-tomcat-9.0.50\\wtpwebapps\\aop_prj

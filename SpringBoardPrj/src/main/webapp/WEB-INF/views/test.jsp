@@ -91,7 +91,48 @@
 			$("#replytext").val(reply);
 			$("#modDiv").show("slow");
 		})
+		//삭제로직
+		$("#replyDelBtn").on("click", function() {
+			let rno = $(".modal-title").html();
 
+			$.ajax({
+				type : 'delete',
+				url : '/replies/' + rno,
+				success : function(result) {
+					if (result === 'SUCCESS') {
+						alert(rno + "번 댓글이 삭제되었습니다.");
+						$("#modDiv").hide("slow");
+						getAllList();
+					}
+				}
+			});
+		});
+
+		//수정로직
+		$("#replyModBtn").on("click", function() {
+			let rno = $(".modal-title").html();
+			let reply = $("#replytext").val();
+
+			$.ajax({
+				type : 'patch',
+				url : '/replies/' + rno,
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "PATCH"
+				},
+				dataType : 'text',
+				data : JSON.stringify({
+					reply : reply
+				}),
+				success : function(result) {
+					if (result == 'SUCCESS') {
+						alert(rno + "번 댓글이 수정되었습니다.");
+						$("#modDiv").hide("slow");
+						getAllList();
+					}
+				}
+			})
+		});
 	}
 </script>
 <meta charset="UTF-8">

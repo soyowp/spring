@@ -6,23 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Re"/>
+		<item key="selection" value="jdbc"/>
 		<list key="findhistory">
-			<item value="rep"/>
-			<item value="re"/>
-			<item value="bind"/>
-			<item value="search"/>
-			<item value="null"/>
-			<item value="Crite"/>
-			<item value="crite"/>
-			<item value="btn"/>
-			<item value="page"/>
-			<item value="insert"/>
-			<item value="get"/>
-			<item value="board"/>
-			<item value="zoo"/>
-			<item value="jstl"/>
-			<item value="data"/>
+			<item value="jdbc"/>
+			<item value="aspect"/>
+			<item value="maven"/>
+			<item value="servlet"/>
+			<item value="junit"/>
+			<item value="replyLi"/>
+			<item value="replyli"/>
+			<item value="li"/>
+			<item value="class = reply"/>
+			<item value="class=reply"/>
+			<item value="riplyli"/>
+			<item value="up"/>
+			<item value="update"/>
+			<item value="time"/>
+			<item value="`"/>
 		</list>
 		<list key="replacehistory">
 		</list>
