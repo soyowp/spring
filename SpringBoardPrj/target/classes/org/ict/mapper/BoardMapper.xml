@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ict.mapper.BoardMapper">
+
+	<!-- 위의 BoardMapper인터페이스의 getList메서드를 호출시 실제로 실행할 쿼리문을 아래와 같이 연결해줍니다. -->
+	<!-- mybatis는 단일자료와 리스트자료를 구문하지 않기 때문에 resultType에는 LIST<>자료형도 아래와 같이 단일 
+		vo만 적어주면됩니다. -->
+
+	<select id="getList" resultType="org.ict.domain.BoardVO">
+		<![CDATA[
+			SELECT * FROM board_tbl 
+				WHERE title LIKE '%'||#{keyword}||'%' 
+			ORDER BY bno DESC
+		]]>
+	</select>
+
+
+	<!-- insert 메서드 연결하고 쿼리문만 작성 -->
+	<!-- 현재 insert는 BoardVO를 파라미터로 받고있습니다. -->
+	<!-- 이 경우 #{변수명}을 쿼리문으로 전달이 가능합니다. -->
+	<insert id="insert">
+		<![CDATA[
+	INSERT INTO board_tbl(bno, title, content, writer)VALUES(board_num.NEXTVAL, #{title}, #{content}, #{writer})
+	]]>
+	</insert>
+
+
+
+
+
+	<!-- 위의 insert 메서드는 쿼리문을 한번만 실행해도 데이터가 입력되지만 단점이라면 bno에 들어간 값을 미리 확인이 불가능하다. 
+		bno에 들어갈 값을 확인할 수 있도록 insert실행 이전에 bno값을 외부에서 조회할수 있도록 변수화시키는 작업이 필요합니다. 
+		그 작업을 수행하는 태그가 selectKey태그입니다 -->
+
+	<insert id="insertSelectKey">
+
+		<!-- 실행 이전에 bno값을 먼저 조회해서 bno변수명으로 저장 keyprototy에 변수명을, order에 before을 
+			넣어서 insert쿼리문 실행 이전에 조회한 bno값을 bno라는 명칭에 저장. -->
+
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			SELECT board_num.nextval from dual <!-- dual은 오라클 가상 테이블 -->
+		</selectKey>
+		INSERT INTO board_tbl (bno, title, content, writer)
+		VALUES(#{bno}, #{title}, #{content}, #{writer})
+	</insert>
+
+	<select id="select" resultType="org.ict.domain.BoardVO">
+		<![CDATA[ 
+		SELECT * FROM board_tbl WHERE bno = #{bno}
+		]]>
+	</select>
+
+
+
+
+
+
+	<delete id="delete">
+	<![CDATA[
+	DELETE FROM board_tbl WHERE bno = #{bno}
+	]]>
+	</delete>
+
+	<update id="update">
+	<![CDATA[
+	UPDATE board_tbl SET title= #{title}, content= #{content}, writer= #{writer}, updatedate=sysdate WHERE bno = #{bno}
+	]]>
+	</update>
+
+	<!-- getListPaging 완성하기 -->
+	<select id="getListPaging" resultType="org.ict.domain.BoardVO">
+	<![CDATA[
+	SELECT bno, title, content, writer, regdate, updatedate, replycount FROM
+	(SELECT
+	/*+INDEX_DESC(board_tbl pk_board)*/
+	rownum rn, board_tbl.* FROM board_tbl
+	WHERE  
+	]]>
+	<include refid="search"></include>
+	
+	<!-- MYSQL의 Limit와 같은 역할을 하는 부분 -->
+	<![CDATA[	
+	rownum <= #{pageNum}*#{amount}) tbl
+	WHERE rn > (#{pageNum}-1)*#{amount}
+	]]>
+	</select>
+
+
+	<select id="totalPage" resultType="int">	
+	SELECT COUNT(*) FROM board_tbl WHERE
+	<!-- 이부분이 sql태그에 저장된 조건절을 넣어주는 위치
+	searchType변수를 전달받기 위해 기존 totalBoard 호출 관련 메서드에
+	searchCriteria를 추가 -->	
+		<include refid="search"></include>	
+	bno>0
+	</select>
+	
+	<update id="updateReplyCount">
+	UPDATE board_tbl SET replycount = replycount + #{amount} WHERE bno = #{bno}
+	</update>
+	
+		<!-- 조건쿼리
+	먼저 searchType이 null인지 아닌지 여부를 확인 후
+	searchType이 null이 아닌 경우만 다시 어떤 키워드가 들어오는지
+	확인해서 맞는 조건문을 공통쿼리와 limit부분 사이에 붙여줍니다.-->
+	
+	<sql id="search">
+	<if test="searchType != null">
+		<if test="searchType == 't'.toString()">
+			(TITLE like '%'||#{keyword}||'%')AND
+		</if>
+		<if test="searchType == 'c'.toString()">
+			(CONTENT like '%'||#{keyword}||'%')AND
+		</if>
+		<if test="searchType == 'w'.toString()">
+			(WRITER like '%'||#{keyword}||'%')AND
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			(TITLE like '%'||#{keyword}||'%')
+				OR
+			(CONTENT like '%'||#{keyword}||'%')
+				AND
+		</if>
+		<if test="searchType == 'tw'.toString()">
+			(TITLE like '%'||#{keyword}||'%')
+				OR
+			(WRITER like '%'||#{keyword}||'%')
+				AND
+		</if>
+		<if test="searchType == 'wc'.toString()">
+			(WRITER like '%'||#{keyword}||'%')
+				OR
+			(CONTENT like '%'||#{keyword}||'%')
+				AND
+		</if>
+	</if>
+	</sql>
+	
+</mapper>

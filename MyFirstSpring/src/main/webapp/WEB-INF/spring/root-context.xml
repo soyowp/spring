@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		
+		
+		
+<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 외부 패키지에 속한 파일을 사용하려면 자바 코드에서는 import구문을 이용했습니다.
+	그러나 스프링 빈 컨테이너 내부에서는 컴포넌트 스캔이라는것을 이요하거나, bean태그를 이용합니다.-->		
+	<!--<bean id="Singer" class="org.ict.controller.di.classfile.Singer"></bean>
+	<bean id="Stage" class="org.ict.controller.di.classfile.Stage">
+	<constructor-arg ref="Singer"></constructor-arg>
+	</bean>-->
+	
+	<!--stage는 생성자에서 singer를 요청하기 떄문에 bean태그 사이에singer를 넣을 수 있도록 constructor-arg를 추가합니다.-->
+
+	<!--broadcast도 공장에 주문하기-->
+	<!--<bean id="Broadcast" class="org.ict.controller.di.classfile.Broadcast">
+	<constructor-arg ref="Stage"/>
+	</bean>-->
+
+	<!--<bean id="Satellite" class="org.ict.controller.di.classfile.Satellite">
+	<constructor-arg ref="Broadcast"/>
+	</bean>-->
+
+	<!--컴포넌트 스캔방식
+	컴포넌트 스캔은 어노테이션과 스캔 범위만으로 처리합니다. 타겟 클래스들이 모여있는 패키지명을 아래 base-package에 적어줍니다.
+	그럼 먼저 Singer부터 시작해서 순서대로 컴포넌트 스캔을 해보겠습니다.-->
+	
+	<context:component-scan base-package="org.ict.controller.di.classfile"/>
+
+	</beans>

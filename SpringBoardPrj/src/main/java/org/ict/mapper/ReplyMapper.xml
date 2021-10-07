@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ict.mapper.ReplyMapper">
+<select id="getList" resultType="org.ict.domain.ReplyVO">
+<![CDATA[
+SELECT * FROM reply_tbl WHERE bno=#{bno}
+ORDER BY rno DESC
+]]>
+</select>
+
+<insert id="create">
+<![CDATA[
+INSERT INTO reply_tbl(rno, bno, reply, replyer) VALUES (reply_num.NEXTVAL, #{bno}, #{reply}, #{replyer})
+]]>
+</insert>
+<!-- 이 위에 reply_tbl에는 5개 컬럼을 지정햇는데 values뒤에는 4개만 넣어주고 있어서 에러났습니다.
+replydate는 어차피 default sysdate가 지정되어있어서 애초에 insert into구문에 적을 필요가 없습니다. 
+없는 bno를 지정해서 insert시킬수없습니다(게시물이 있어야 거기 댓글이 있는거기때문에)
+-->
+
+<update id="update">
+<![CDATA[
+UPDATE reply_tbl SET reply = #{reply}, updateDate = SYSDATE
+WHERE rno = #{rno}
+]]>
+</update>
+
+<delete id="delete">
+<![CDATA[
+DELETE FROM reply_tbl WHERE rno=#{rno}
+]]>
+</delete>
+
+<select id="getBno" resultType="long">
+SELECT bno FROM reply_tbl
+WHERE rno = #{rno}
+</select>
+</mapper>
