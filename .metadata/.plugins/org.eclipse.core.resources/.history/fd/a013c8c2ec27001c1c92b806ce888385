@@ -1,0 +1,43 @@
+package org.ict.security;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Controller;
+
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@Controller
+public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+	log.warn("로그인성공");
+	List<String> roleList = new ArrayList<>();
+	
+		for(GrantedAuthority role : authentication.getAuthorities()) {
+			roleList.add(role.getAuthority());
+		}
+		
+		log.warn("부여된 권한" + roleList);
+		if(roleList.contains("ROLE_ADMIN")) {
+			response.sendRedirect("/secu/admin");
+		}
+		if(roleList.contains("ROLE_MEMBER")) {
+			response.sendRedirect("/secu/member");
+		}
+		
+		response.sendRedirect("/");
+	}
+
+}

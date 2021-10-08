@@ -1,0 +1,28 @@
+package org.ict.security;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Controller;
+
+import jdk.internal.org.jline.utils.Log;
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@Controller
+public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+	log.warn("로그인성공");
+	
+		
+	}
+
+}

@@ -1,0 +1,8 @@
+package AccessDeniedHandler;
+
+
+public interface AccessDeniedHandler {
+
+	public void handle();
+			
+}

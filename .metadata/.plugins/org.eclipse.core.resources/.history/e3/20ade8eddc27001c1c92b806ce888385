@@ -1,0 +1,5 @@
+package AccessDeniedHandler;
+
+public class CustomAccessDeniedHandler {
+
+}

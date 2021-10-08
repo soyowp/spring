@@ -1,0 +1,5 @@
+package AccessDeniedHandler;
+
+public interface AccessDeniedHandler {
+
+}
