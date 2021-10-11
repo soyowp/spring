@@ -1,0 +1,5 @@
+package org.ict.security;
+
+public class CustomUserDetailService {
+
+}

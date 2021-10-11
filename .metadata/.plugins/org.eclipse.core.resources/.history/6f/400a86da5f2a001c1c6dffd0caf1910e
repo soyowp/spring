@@ -1,0 +1,25 @@
+package org.ict.domain;
+
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import lombok.Getter;
+
+@Getter
+public class CustomUser extends User{
+	
+	private MemberVO member;
+	
+	public CustomUser(String username, String password, Collection <? extends GrantedAuthority> auth ) {
+		super(username, password, auth);
+	}
+	
+	public CustomUser(MemberVO vo) {
+		super(vo.getUserid(), vo.getUserpw(),
+				vo.getAuthList().stream().map(author-> newSimpleGrantedAuthority(author.getAuth()))
+				.collect(Collectors.toList()));
+	}
+
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace ="org.ict.mapper.MemberMapper">
+<resultMap type="org.ict.domain.MemberVO" id="memberMap">
+<id property ="userid" column="userid"/>
+<result property="userid" column="userid"/>
+<result property="userpw" column="userpw"/>
+<result property="userName" column="username"/>
+<result property="regDate" column="regdate"/>
+<result property="updateDate" column="updatedate"/>
+<collection property="authList" column="authMap"/>
+
+</resultMap>
+</mapper>

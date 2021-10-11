@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="org.ict.mapper.MemberMapper">
+	<resultMap type="org.ict.domain.MemberVO" id="memberMap">
+		<id property="userid" column="userid" />
+		<result property="userid" column="userid" />
+		<result property="userpw" column="userpw" />
+		<result property="userName" column="username" />
+		<result property="regDate" column="regdate" />
+		<result property="updateDate" column="updatedate" />
+		<collection property="authList" column="authMap">
+		</collection>
+	</resultMap>
+
+	<resutlMap type="org.ict.domain.AuthVO" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="auth" column="auth" />
+	</resutlMap>
+
+	<select id="read" resultMap="memberMap">
+		SELECT
+		m.userid, userpw, username, enabled, regdate, updatedate, a.auth
+		FROM
+		member_tbl m LEFT OUTER JOIN member_auth a on m.userid= a.userid
+		WHERE m.uwerid=#{userid}
+	</select>
+</mapper>
