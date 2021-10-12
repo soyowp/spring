@@ -1,0 +1,6 @@
+package org.ict.service;
+
+public class UserSerivce {
+
+	public void register(MemberVO vo);
+}

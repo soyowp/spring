@@ -1,0 +1,17 @@
+package org.ict.service;
+
+import org.ict.domain.MemberVO;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+public class UserService {
+
+	@Override
+	public UserDetails register(MemberVO vo){
+		log.info("회원가입 실행");
+		PasswordEncoder passwordEncoder;
+		String pw = passwordEncoder.encode(vo.getUserpw());
+		vo.setUserpw(pw);
+		mapper.join(vo);
+	}
+}

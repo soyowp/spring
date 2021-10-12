@@ -7,4 +7,6 @@ import org.ict.domain.MemberVO;
 public interface MemberMapper {
 
 	public MemberVO read(String userid);
+	public void join(MemberVO vo);
+	public void authJoin(MemberVO vo);
 }

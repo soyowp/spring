@@ -1,0 +1,24 @@
+package org.ict.service;
+
+import org.ict.domain.MemberVO;
+import org.ict.mapper.MemberMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import lombok.extern.log4j.Log4j;
+
+@Service
+@Log4j
+public class UserService {
+
+	private MemberMapper mapper;
+	@Override
+	public UserDetails register(MemberVO vo){
+		log.info("회원가입 실행");
+		PasswordEncoder passwordEncoder;
+		String pw = passwordEncoder.encode(vo.getUserpw());
+		vo.setUserpw(pw);
+		mapper.join(vo);
+	}
+}

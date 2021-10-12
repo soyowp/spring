@@ -26,4 +26,14 @@
 		member_tbl m LEFT OUTER JOIN member_auth a on m.userid= a.userid
 		WHERE m.userid=#{userid}
 	</select>
+	
+	<select id="join">
+		INSERT INTO Member_Tbl(userid, userpw, username)
+		VALUES #{userid}, #{userpw}, #{username}
+	</select>
+	
+	<select id="authJoin">
+	INSERT INTO Member_Auth(userid, auth)
+	VALUES #{userid}, #{auth}
+	</select>
 </mapper>
