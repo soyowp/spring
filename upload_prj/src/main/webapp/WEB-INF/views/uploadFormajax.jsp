@@ -3,6 +3,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.uploadResult{
+width:100%;
+background-color: gray; 
+}
+.uploadResult ul{
+display:flex;;
+flex-flow:row;
+justify-content: center;
+align-items:center;
+}
+.uploadResult ul li{
+list-style: none;
+padding:10px;
+}
+.uploadResult ul li img{
+width:20px;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
@@ -24,6 +43,7 @@ $(document).ready(function(){
 	}
 	return true;
 }
+	let cloneObj = $(".uploadDiv").clone();
 	
 		$('#uploadBtnajax').on("click", function(e){
 			let formData = new FormData();
@@ -47,12 +67,58 @@ $(document).ready(function(){
 			data : formData,
 			type: 'POST',
 			success : function(result){
-			
-				alert("uploaded");
+				
+				console.log(result);
+				
+				showUploadedFile(result);
+				
+				$(".uploadDiv").html(cloneObj.html());
 				
 			}
 		});
+		
+		$(".uploadResult").on("click", "span", function(e){
+			
+			let targetFile = $(this).data("file") ;
+			let type = $(this).data("type");
+			let targetLi = $(this).closest("li");
+			
+			$.ajax({
+				url: '/deleteFile',
+				data: {fileName: targetFile, type:type},
+				dataType : 'text',
+				type:'POST',
+				success: function(result){
+					alert(result);
+					targetLi.remove();
+				}
+			
+			});
+		});
 	});
+		
+		let uploadResult = $(".uploadResult ul");
+		
+		function showUploadedFile(uploadResultArr){
+			let str="";
+			
+			$(uploadResultArr).each(function(i, obj){
+				
+				if(!obj.image){
+					str += "<li><img src='/resources/attach.jpg'>"
+						+ obj.fileName +"</li>";
+				} else{
+				//str += "<li>" + obj.fileName + "</li>";
+				let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+				str += "<li><a href='/download?fileName="+fileCallPath+"'>"+"<img src='/display?fileName="+fileCallPath+"'>"
+						+"<img src='/resources/attachicon.png'>"+"obj.fileName"+"</a>"
+						+"<span data-file=\'"+fileCallPath + "\' data-type='image'> X <\span>"
+						+"</li>";
+				}
+			});
+			uploadResult.append(str);
+		}
+		
 });
 </script>
 
@@ -65,6 +131,11 @@ $(document).ready(function(){
 	AJAX컨트롤러
 	<div class="uploadDiv">
 	<input type="file" name="uploadFileajax" multiple>
+	</div>
+	<div class="uploadResult">
+	<ul>
+	<!-- 업로드파일 자리 -->
+	</ul>
 	</div>
 	<button id="uploadBtnajax">Upload</button>
 </body>
